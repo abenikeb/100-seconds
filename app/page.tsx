@@ -434,7 +434,7 @@ export default function Component() {
 								<Progress
 									value={(timeLeft / 100) * 100}
 									className="h-3 bg-lime-900"
-									indicatorClassName="bg-lime-400"
+									// indicatorClassName="bg-lime-400"
 								/>
 								<p className="text-right mt-2">
 									{translations[language].timeLeft}: {timeLeft}s
