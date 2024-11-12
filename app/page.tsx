@@ -439,7 +439,7 @@ export default function Component() {
 			<header className="w-full bg-white shadow-md p-3">
 				<div className="max-w-6xl mx-auto flex justify-between items-center">
 					<div className="flex items-center space-x-2">
-						<Zap className="h-8 w-8 text-orange-600" />
+						<Zap className="h-8 w-8 text-lime-500" />
 						<h1 className="text-2xl font-bold text-blue-600">
 							{translations[language].title}
 						</h1>
@@ -650,7 +650,7 @@ export default function Component() {
 					<Zap className="absolute bottom-1/4 right-1/4 w-16 h-16 text-pink-400 opacity-20 animate-bounce" />
 				</div>
 
-				<Card className="max-w-4xl w-full bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl p-8 z-10">
+				<Card className="max-w-4xl w-full bg-white/60 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl py-8 px-5 z-10">
 					<CardContent>
 						{gameState === "start" && (
 							<motion.div
@@ -666,7 +666,7 @@ export default function Component() {
 								</p>
 								<Button
 									onClick={startGame}
-									className="text-lg px-8 py-4 bg-orange-600 hover:bg-blue-700 text-white rounded-full transition-colors duration-300 h-12">
+									className="text-lg px-8 py-4 bg-lime-600 hover:bg-blue-700 text-white rounded-full transition-colors duration-300 h-12">
 									{translations[language].start} <Rocket className="ml-2" />
 								</Button>
 								<div className="mt-8">
@@ -679,7 +679,7 @@ export default function Component() {
 												<div
 													key={index}
 													className="bg-blue-100 p-4 rounded-lg flex-shrink-0 w-64">
-													<prize.icon className="h-8 w-8 text-blue-600 mb-2" />
+													<prize.icon className="h-8 w-8 text-lime-600 mb-2" />
 													<h4 className="text-lg font-semibold text-blue-800">
 														{
 															translations[language][
@@ -693,7 +693,7 @@ export default function Component() {
 										</div>
 									</div>
 								</div>
-								<div className="mt-8">
+								<div className="mt-6">
 									<h3 className="text-2xl font-semibold mb-2 text-blue-600">
 										High Score: {highScore}
 									</h3>
