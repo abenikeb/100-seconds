@@ -1,206 +1,172 @@
-import {
-	Tv,
-	Cpu,
-	Headphones,
-	Smartphone,
-	Camera,
-	Watch,
-	Server,
-	Grid,
-} from "lucide-react";
+export const getPageDetails = async () => {
+	const translations = {
+		en: {
+			title: "100 Seconds",
+			start: "Start Quiz",
+			ready:
+				"Answer 10 questions in 100 seconds. Are you ready to explore the cosmos?",
+			timeLeft: "Time left",
+			question: "Question",
+			of: "of",
+			complete: "Quiz Complete!",
+			score: "Your Score",
+			playAgain: "Play Again",
+			home: "Home",
+			faq: "FAQ",
+			winners: "Winners",
+			language: "Language",
+		},
+		am: {
+			title: "የ100 ሰኮንድ ጨዋታ",
+			start: "ጨዋታ ጀምር",
+			ready: "በ100 ሰከንዶች ውስጥ 10 ጥያቄዎችን መልስ። ኮዞስን ለመ ዝግጁ ነህ?",
+			timeLeft: "የቀረ ጊዜ",
+			question: "ጥያቄ",
+			of: "ከ",
+			complete: "ጨዋታ ተጠናቅቋል!",
+			score: "የአንተ ውጤት",
+			playAgain: "እንደገና ጫወት",
+			home: "መነሻ ገጽ",
+			faq: "ተደጋጋሚ ጥያቄዎች",
+			winners: "አሸናፊዎች",
+			language: "ቋንቋ",
+		},
+		om: {
+			title: "Taphi Qorannoo Qilleensaa",
+			start: "Taphicha Jalqabi",
+			ready:
+				"Gaaffiilee 10 sekoondii 100 keessatti deebisi. Cosmos sakatta'uuf qophii dha?",
+			timeLeft: "Yeroo hafe",
+			question: "Gaaffii",
+			of: "kan",
+			complete: "Qormaanni Xumurameera!",
+			score: "Qabxii Kee",
+			playAgain: "Ammas Taphadhu",
+			home: "Gara Jalqabaatti",
+			faq: "Gaaffilee Yeroo Hedduu Gaafataman",
+			winners: "Injifattoota",
+			language: "Afaan",
+		},
+		ti: {
+			title: "ናይ ጠፈር ፈተና ጸወታ",
+			start: "ጸወታ ጀምር",
+			ready: "ኣብ 100 ካልኢታት 10 ሕቶታት መልሲ። ኮዝሞስ ንምርመር ድሉው ዲኻ?",
+			timeLeft: "ዝተረፈ ግዜ",
+			question: "ሕቶ",
+			of: "ካብ",
+			complete: "ጸወታ ተዛዚሙ!",
+			score: "ናትካ ውጽኢት",
+			playAgain: "ከም ብሓድሽ ጻወት",
+			home: "መበገሲ ገጽ",
+			faq: "ተደጋጋሚ ሕቶታት",
+			winners: "ተዓወትቲ",
+			language: "ቋንቋ",
+		},
+		so: {
+			title: "Ciyaarta Imtixaanka Hawada",
+			start: "Bilow Ciyaarta",
+			ready:
+				"Ka jawaab 10 su'aalood 100 ilbiriqsi gudaheed. Ma diyaar u tahay inaad sahamiso cosmos?",
+			timeLeft: "Waqtiga haray",
+			question: "Su'aal",
+			of: "ka mid ah",
+			complete: "Imtixaanka waa la dhammeeyey!",
+			score: "Dhibcahaaga",
+			playAgain: "Mar kale ciyaar",
+			home: "Bogga Hore",
+			faq: "Su'aalaha Inta Badan La Isweydiiyo",
+			winners: "Guuleystayaasha",
+			language: "Luqadda",
+		},
+	} as any;
 
-export const getUserOrder = async () => {
-	// Mock data for orders with more details
-	const orders = [
-		{
-			id: "ORD001",
-			date: "2024-10-20",
-			total: 1299.99,
-			status: "Delivered",
-			progress: 100,
-			items: [
-				{
-					name: "Wireless Headphones",
-					image: "/assets/images/headphones.jpg?height=80&width=80",
-					quantity: 1,
-					price: 499.99,
-				},
-				{
-					name: "Phone Case",
-					image: "/assets/images/phone_case.jpg?height=80&width=80",
-					quantity: 2,
-					price: 50.0,
-				},
-			],
-		},
-		{
-			id: "ORD002",
-			date: "2024-10-18",
-			total: 799.5,
-			status: "Shipped",
-			progress: 75,
-			items: [
-				{
-					name: "Smart Speaker",
-					image: "/assets/images/smart_speaker.jpg?height=80&width=80",
-					quantity: 1,
-					price: 799.5,
-				},
-			],
-		},
-		{
-			id: "ORD003",
-			date: "2023-10-15",
-			total: 1499.99,
-			status: "Processing",
-			progress: 25,
-			items: [
-				{
-					name: "Smartwatch",
-					image: "/assets/images/smartwatch.jpg?height=80&width=80",
-					quantity: 1,
-					price: 1499.99,
-				},
-			],
-		},
+	// Sample questions - replace with your own and add translations
+	const questions = {
+		en: [
+			{
+				question: "What is the closest planet to the Sun?",
+				options: ["Venus", "Mercury", "Mars", "Earth"],
+				answer: 1,
+			},
+			{
+				question: "How many moons does Mars have?",
+				options: ["0", "1", "2", "4"],
+				answer: 2,
+			},
+			// ... add more questions
+		],
+		am: [
+			{
+				question: "ከፀሐይ በጣም የቀረበው ፕላኔት የትኛው ነው?",
+				options: ["ቬነስ", "ሜርኩሪ", "ማርስ", "ምድር"],
+				answer: 1,
+			},
+			{
+				question: "ማርስ ስንት ጨረቃዎች አሉት?",
+				options: ["0", "1", "2", "4"],
+				answer: 2,
+			},
+			// ... add more questions in Amharic
+		],
+		om: [
+			{
+				question: "Addunyaa Biiftuu irraa dhihoo kami?",
+				options: ["Venus", "Mercury", "Mars", "Dachee"],
+				answer: 1,
+			},
+			{
+				question: "Mars ji'oota meeqa qaba?",
+				options: ["0", "1", "2", "4"],
+				answer: 2,
+			},
+			// ... add more questions in Oromifa
+		],
+		ti: [
+			{
+				question: "ካብ ጸሓይ ዝቐረበ ፕላኔት እንታይ እዩ?",
+				options: ["ቬነስ", "መርኩሪ", "ማርስ", "ምድሪ"],
+				answer: 1,
+			},
+			{
+				question: "ማርስ ክንደይ ወርሓታት ኣለዋ?",
+				options: ["0", "1", "2", "4"],
+				answer: 2,
+			},
+			// ... add more questions in Tigrigna
+		],
+		so: [
+			{
+				question: "Meesha ugu dhow qorraxda waa kee?",
+				options: ["Venus", "Mercury", "Mars", "Dhulka"],
+				answer: 1,
+			},
+			{
+				question: "Mars waxay leedahay imisa dayax?",
+				options: ["0", "1", "2", "4"],
+				answer: 2,
+			},
+			// ... add more questions in Somali
+		],
+	} as any;
+
+	const languageNames = {
+		en: "English",
+		am: "አማርኛ",
+		om: "Afaan Oromoo",
+		ti: "ትግርኛ",
+		so: "Af-Soomaali",
+	};
+
+	const winners = [
+		{ name: "Abebe Bikila", phone: "0911234567" },
+		{ name: "Tirunesh Dibaba", phone: "0922345678" },
+		{ name: "Haile Gebrselassie", phone: "0933456789" },
+		{ name: "Derartu Tulu", phone: "0944567890" },
+		{ name: "Kenenisa Bekele", phone: "0955678901" },
 	];
 
-	return orders;
-};
-
-export const getUserCart = async () => {
-	// Mock data for cart with more details
-	const carts = [
-		{
-			id: 1,
-			name: "4K OLED TV",
-			price: 2299.99,
-			quantity: 1,
-			image: "/assets/images/4k_tv.jpg?height=100&width=100",
-		},
-		{
-			id: 2,
-			name: "Wireless Keyboard",
-			price: 99.99,
-			quantity: 1,
-			image: "/assets/images/keyboard.jpg?height=100&width=100",
-		},
-	];
-
-	return carts;
-};
-
-export const getAllProducts = async () => {
-	// Mock data for electronics products
-	const allProducts = [
-		{
-			id: 1,
-			name: "4K OLED TV",
-			price: 2299.99,
-			image: "/assets/images/4k_tv.jpg?height=200&width=200",
-			category: "televisions",
-			location: "Nairobi",
-			rating: 4.8,
-			description:
-				"Experience stunning visuals with our latest 4K OLED technology.",
-		},
-		{
-			id: 2,
-			name: "Gaming Laptop",
-			price: 1599.99,
-			image: "/assets/images/gaming_laptop.jpg?height=200&width=200",
-			category: "computers",
-			location: "Mombasa",
-			rating: 4.6,
-			description:
-				"Powerful performance with high refresh rate display for gaming enthusiasts.",
-		},
-		{
-			id: 3,
-			name: "Wireless Headphones",
-			price: 299.99,
-			image: "/assets/images/headphones.jpg?height=200&width=200",
-			category: "audio",
-			location: "Kisumu",
-			rating: 4.7,
-			description:
-				"Immerse yourself in high-quality sound with noise-cancellation.",
-		},
-		{
-			id: 4,
-			name: "Smartphone",
-			price: 999.99,
-			image: "/assets/images/smartphone.jpg?height=200&width=200",
-			category: "phones",
-			location: "Nakuru",
-			rating: 4.5,
-			description: "Advanced smartphone with excellent camera and performance.",
-		},
-		{
-			id: 5,
-			name: "DSLR Camera",
-			price: 1299.99,
-			image: "/assets/images/camera.jpg?height=200&width=200",
-			category: "cameras",
-			location: "Eldoret",
-			rating: 4.4,
-			description:
-				"Capture life’s moments with exceptional clarity and detail.",
-		},
-		{
-			id: 6,
-			name: "Smartwatch",
-			price: 249.99,
-			image: "/assets/images/smartwatch.jpg?height=200&width=200",
-			category: "wearables",
-			location: "Thika",
-			rating: 4.3,
-			description:
-				"Stay connected and track your fitness with our latest smartwatch.",
-		},
-	];
-
-	return allProducts;
-};
-
-export const getCategories = async () => {
-	const categories = [
-		{
-			name: "All",
-			value: "all",
-			icon: Grid,
-		},
-		{
-			name: "Televisions",
-			value: "televisions",
-			icon: Tv,
-		},
-		{
-			name: "Computers",
-			value: "computers",
-			icon: Cpu,
-		},
-		{
-			name: "Audio",
-			value: "audio",
-			icon: Headphones,
-		},
-		{
-			name: "Phones",
-			value: "phones",
-			icon: Smartphone,
-		},
-		{
-			name: "Cameras",
-			value: "cameras",
-			icon: Camera,
-		},
-		{
-			name: "Wearables",
-			value: "wearables",
-			icon: Watch,
-		},
-	];
-
-	return categories;
+	return {
+		translations,
+		questions,
+	};
 };
