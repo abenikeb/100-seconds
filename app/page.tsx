@@ -436,7 +436,7 @@ export default function Component() {
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-sky-200 via-blue-100 to-indigo-100 flex flex-col">
-			<header className="w-full bg-white shadow-md p-4">
+			<header className="w-full bg-white shadow-md p-3">
 				<div className="max-w-6xl mx-auto flex justify-between items-center">
 					<div className="flex items-center space-x-2">
 						<Zap className="h-8 w-8 text-orange-600" />
@@ -666,7 +666,7 @@ export default function Component() {
 								</p>
 								<Button
 									onClick={startGame}
-									className="text-lg px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors duration-300 h-12">
+									className="text-lg px-8 py-4 bg-orange-600 hover:bg-blue-700 text-white rounded-full transition-colors duration-300 h-12">
 									{translations[language].start} <Rocket className="ml-2" />
 								</Button>
 								<div className="mt-8">
@@ -694,7 +694,7 @@ export default function Component() {
 									</div>
 								</div>
 								<div className="mt-8">
-									<h3 className="text-2xl font-semibold mb-4 text-blue-600">
+									<h3 className="text-2xl font-semibold mb-2 text-blue-600">
 										High Score: {highScore}
 									</h3>
 								</div>
