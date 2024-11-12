@@ -80,7 +80,6 @@ export const getPageDetails = async () => {
 		},
 	} as any;
 
-	// Sample questions - replace with your own and add translations
 	const questions = {
 		en: [
 			{
@@ -158,11 +157,46 @@ export const getPageDetails = async () => {
 	};
 
 	const winners = [
-		{ name: "Abebe Bikila", phone: "0911234567" },
-		{ name: "Tirunesh Dibaba", phone: "0922345678" },
-		{ name: "Haile Gebrselassie", phone: "0933456789" },
-		{ name: "Derartu Tulu", phone: "0944567890" },
-		{ name: "Kenenisa Bekele", phone: "0955678901" },
+		{ name: "Abebe Bikila", phone: "0911234567", prize: "Daily Prize" },
+		{ name: "Tirunesh Dibaba", phone: "0922345678", prize: "Weekly Prize" },
+		{ name: "Haile Gebrselassie", phone: "0933456789", prize: "Monthly Prize" },
+		{ name: "Derartu Tulu", phone: "0944567890", prize: "Daily Prize" },
+		{ name: "Kenenisa Bekele", phone: "0955678901", prize: "Weekly Prize" },
+	];
+
+	// const prizes = [
+	// 	{ name: "Daily Prize", value: "500 ETB Airtime", icon: Gift },
+	// 	{ name: "Weekly Prize", value: "5000 ETB Cash", icon: Zap },
+	// 	{ name: "Monthly Prize", value: "Samsung Galaxy S21", icon: Star },
+	// ];
+
+	const faqItems = [
+		{
+			question: "How does the 100 Seconds Quiz work?",
+			answer:
+				"The 100 Seconds Quiz challenges you to answer 10 questions about space and astronomy in just 100 seconds. You'll need quick thinking and cosmic knowledge to succeed!",
+		},
+		{
+			question: "How do I win prizes?",
+			answer:
+				"Prizes are awarded daily, weekly, and monthly based on the highest scores. The more you play and the better you perform, the higher your chances of winning!",
+		},
+		{
+			question: "Can I play the quiz multiple times?",
+			answer:
+				"Yes! You can play the quiz as many times as you like to improve your score and increase your chances of winning prizes.",
+		},
+		{
+			question: "How do I subscribe to play?",
+			answer:
+				"To subscribe, click the 'Start Quiz' button and enter your phone number for Telebirr payment. Once subscribed, you can play the quiz immediately.",
+		},
+		{
+			question:
+				"What happens if I lose my internet connection during the quiz?",
+			answer:
+				"If you lose connection during the quiz, your progress will be saved. You can resume from where you left off when you reconnect.",
+		},
 	];
 
 	return {

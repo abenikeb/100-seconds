@@ -60,21 +60,71 @@ const translations = {
 		faq: "FAQ",
 		winners: "Winners",
 		language: "Language",
-		prizes: "Prizes",
-		dailyPrize: "Daily Prize",
-		weeklyPrize: "Weekly Prize",
-		monthlyPrize: "Monthly Prize",
-		subscribe: "Subscribe",
-		subscribeNow: "Subscribe Now",
-		payment: "Telebirr Payment",
-		phoneNumber: "Phone Number",
-		profile: "Profile",
-		logout: "Logout",
 	},
-	// ... (add translations for other languages)
+	am: {
+		title: "የ100 ሰኮንድ ጨዋታ",
+		start: "ጨዋታ ጀምር",
+		ready: "በ100 ሰከንዶች ውስጥ 10 ጥያቄዎችን መልስ። ኮዞስን ለመ ዝግጁ ነህ?",
+		timeLeft: "የቀረ ጊዜ",
+		question: "ጥያቄ",
+		of: "ከ",
+		complete: "ጨዋታ ተጠናቅቋል!",
+		score: "የአንተ ውጤት",
+		playAgain: "እንደገና ጫወት",
+		home: "መነሻ ገጽ",
+		faq: "ተደጋጋሚ ጥያቄዎች",
+		winners: "አሸናፊዎች",
+		language: "ቋንቋ",
+	},
+	om: {
+		title: "Taphi Qorannoo Qilleensaa",
+		start: "Taphicha Jalqabi",
+		ready:
+			"Gaaffiilee 10 sekoondii 100 keessatti deebisi. Cosmos sakatta'uuf qophii dha?",
+		timeLeft: "Yeroo hafe",
+		question: "Gaaffii",
+		of: "kan",
+		complete: "Qormaanni Xumurameera!",
+		score: "Qabxii Kee",
+		playAgain: "Ammas Taphadhu",
+		home: "Gara Jalqabaatti",
+		faq: "Gaaffilee Yeroo Hedduu Gaafataman",
+		winners: "Injifattoota",
+		language: "Afaan",
+	},
+	ti: {
+		title: "ናይ ጠፈር ፈተና ጸወታ",
+		start: "ጸወታ ጀምር",
+		ready: "ኣብ 100 ካልኢታት 10 ሕቶታት መልሲ። ኮዝሞስ ንምርመር ድሉው ዲኻ?",
+		timeLeft: "ዝተረፈ ግዜ",
+		question: "ሕቶ",
+		of: "ካብ",
+		complete: "ጸወታ ተዛዚሙ!",
+		score: "ናትካ ውጽኢት",
+		playAgain: "ከም ብሓድሽ ጻወት",
+		home: "መበገሲ ገጽ",
+		faq: "ተደጋጋሚ ሕቶታት",
+		winners: "ተዓወትቲ",
+		language: "ቋንቋ",
+	},
+	so: {
+		title: "Ciyaarta Imtixaanka Hawada",
+		start: "Bilow Ciyaarta",
+		ready:
+			"Ka jawaab 10 su'aalood 100 ilbiriqsi gudaheed. Ma diyaar u tahay inaad sahamiso cosmos?",
+		timeLeft: "Waqtiga haray",
+		question: "Su'aal",
+		of: "ka mid ah",
+		complete: "Imtixaanka waa la dhammeeyey!",
+		score: "Dhibcahaaga",
+		playAgain: "Mar kale ciyaar",
+		home: "Bogga Hore",
+		faq: "Su'aalaha Inta Badan La Isweydiiyo",
+		winners: "Guuleystayaasha",
+		language: "Luqadda",
+	},
 } as any;
 
-// Sample questions - replace with your own and add translations
 const questions = {
 	en: [
 		{
@@ -87,7 +137,26 @@ const questions = {
 			options: ["0", "1", "2", "4"],
 			answer: 2,
 		},
-		// ... add more questions
+		{
+			question: "Who won the FIFA World Cup in 2018?",
+			options: ["Brazil", "Germany", "France", "Argentina"],
+			answer: 2,
+		},
+		{
+			question: "What is the capital of Japan?",
+			options: ["Seoul", "Tokyo", "Beijing", "Bangkok"],
+			answer: 1,
+		},
+		{
+			question: "Who is known as the first president of the United States?",
+			options: [
+				"Abraham Lincoln",
+				"George Washington",
+				"John Adams",
+				"Thomas Jefferson",
+			],
+			answer: 1,
+		},
 	],
 	am: [
 		{
@@ -100,7 +169,21 @@ const questions = {
 			options: ["0", "1", "2", "4"],
 			answer: 2,
 		},
-		// ... add more questions in Amharic
+		{
+			question: "የ2018 ዓ.ም የእግር ኳስ ዓለም ዋንጫ የማሸነፈው ሃገር የትኛው ነበር?",
+			options: ["ብራዚል", "ጀርመን", "ፈረንሳይ", "አርጀንቲና"],
+			answer: 2,
+		},
+		{
+			question: "የጃፓን ከተማ ዋና ከተማ ማን ነው?",
+			options: ["ሶል", "ቶኪዮ", "ቤዂንግ", "ባንኮክ"],
+			answer: 1,
+		},
+		{
+			question: "አሜሪካን ከፍተኛ ስራ ያረገው የመጀመሪያው ፕሬዝዳንት ማን ነው?",
+			options: ["አብራሃም ሊንኮልን", "ጆርጅ ዋሽንግተን", "ጆን አዳምስ", "ቶማስ ጀፈርሰን"],
+			answer: 1,
+		},
 	],
 	om: [
 		{
@@ -113,7 +196,26 @@ const questions = {
 			options: ["0", "1", "2", "4"],
 			answer: 2,
 		},
-		// ... add more questions in Oromifa
+		{
+			question: "Guddichi tapha Kubbaa Miillaa 2018 moo'ate kam?",
+			options: ["Biraaziil", "Jarmanii", "Faransaayii", "Arjentiinaa"],
+			answer: 2,
+		},
+		{
+			question: "Kaaba Tokkoffaa Jaappaan maali?",
+			options: ["Sool", "Tokiyoo", "Beijing", "Baankook"],
+			answer: 1,
+		},
+		{
+			question: "Prezidaantii Amerikaa jalqabaa eenyu dha?",
+			options: [
+				"Abrahaam Liinkoolin",
+				"George Washington",
+				"John Adams",
+				"Thomas Jefferson",
+			],
+			answer: 1,
+		},
 	],
 	ti: [
 		{
@@ -126,7 +228,21 @@ const questions = {
 			options: ["0", "1", "2", "4"],
 			answer: 2,
 		},
-		// ... add more questions in Tigrigna
+		{
+			question: "ኣብ 2018 ዓ.ም ዓለም ዋንጫ ስነተጫወት ዝረኽብ ሃገር እንታይ እያ?",
+			options: ["ብራዚል", "ጀርመን", "ፈረንሳይ", "አርጀንቲና"],
+			answer: 2,
+		},
+		{
+			question: "ናይ ጃፓን ዋና ከተማ ስም እንታይ እዩ?",
+			options: ["ሶል", "ቶኪዮ", "ቤጂንግ", "ባንኮክ"],
+			answer: 1,
+		},
+		{
+			question: "ንኢድ ዩናይትድ ስቴትስ ቀዳማይ ፕሬዝደንት ማን እዩ?",
+			options: ["አብርሃም ሊንኮልን", "ጆርጅ ዋሽንግተን", "ጆን አዳምስ", "ቶማስ ጄፈርሰን"],
+			answer: 1,
+		},
 	],
 	so: [
 		{
@@ -139,7 +255,26 @@ const questions = {
 			options: ["0", "1", "2", "4"],
 			answer: 2,
 		},
-		// ... add more questions in Somali
+		{
+			question: "Yaa qaaday koobkii adduunka ee FIFA 2018?",
+			options: ["Brazil", "Germany", "France", "Argentina"],
+			answer: 2,
+		},
+		{
+			question: "Caasimada Japan waa tee?",
+			options: ["Seoul", "Tokyo", "Beijing", "Bangkok"],
+			answer: 1,
+		},
+		{
+			question: "Madaxweynihii ugu horreeyay ee Mareykanka waa kuma?",
+			options: [
+				"Abraham Lincoln",
+				"George Washington",
+				"John Adams",
+				"Thomas Jefferson",
+			],
+			answer: 1,
+		},
 	],
 } as any;
 
@@ -304,7 +439,7 @@ export default function Component() {
 			<header className="w-full bg-white shadow-md p-4">
 				<div className="max-w-6xl mx-auto flex justify-between items-center">
 					<div className="flex items-center space-x-2">
-						<Zap className="h-8 w-8 text-blue-600" />
+						<Zap className="h-8 w-8 text-orange-600" />
 						<h1 className="text-2xl font-bold text-blue-600">
 							{translations[language].title}
 						</h1>
@@ -689,7 +824,7 @@ export default function Component() {
 							</div>
 							<Button
 								onClick={handleSubscribe}
-								className="w-full bg-blue-600 hover:bg-blue-700 text-lime-300">
+								className="w-full bg-blue-600 hover:bg-blue-700 text-white">
 								{translations[language].subscribeNow} <Phone className="ml-2" />
 							</Button>
 						</div>
