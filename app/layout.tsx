@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Raleway as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
-import Footer from "@components/shared/footer";
+import Footer from "@components/Home/footer";
 import Provider from "@/components/Provider";
 import "./globals.css";
 
@@ -30,6 +30,7 @@ export default function RootLayout({
 						fontSans.variable
 					)}>
 					{children}
+					<Footer />
 				</body>
 			</Provider>
 		</html>

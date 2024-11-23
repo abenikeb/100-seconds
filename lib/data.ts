@@ -1,3 +1,5 @@
+import { Star, Zap, Gift, Globe, Book, Calculator } from "lucide-react";
+
 export const getPageDetails = async () => {
 	const translations = {
 		en: {
@@ -15,6 +17,7 @@ export const getPageDetails = async () => {
 			faq: "FAQ",
 			winners: "Winners",
 			language: "Language",
+			submit: "Submit Answer",
 		},
 		am: {
 			title: "የ100 ሰኮንድ ጨዋታ",
@@ -30,6 +33,7 @@ export const getPageDetails = async () => {
 			faq: "ተደጋጋሚ ጥያቄዎች",
 			winners: "አሸናፊዎች",
 			language: "ቋንቋ",
+			submit: "መልስ አስገባ",
 		},
 		om: {
 			title: "Taphi Qorannoo Qilleensaa",
@@ -46,6 +50,7 @@ export const getPageDetails = async () => {
 			faq: "Gaaffilee Yeroo Hedduu Gaafataman",
 			winners: "Injifattoota",
 			language: "Afaan",
+			submit: "Deebii Galchi",
 		},
 		ti: {
 			title: "ናይ ጠፈር ፈተና ጸወታ",
@@ -61,6 +66,7 @@ export const getPageDetails = async () => {
 			faq: "ተደጋጋሚ ሕቶታት",
 			winners: "ተዓወትቲ",
 			language: "ቋንቋ",
+			submit: "መልሲ ኣእቱ",
 		},
 		so: {
 			title: "Ciyaarta Imtixaanka Hawada",
@@ -77,23 +83,107 @@ export const getPageDetails = async () => {
 			faq: "Su'aalaha Inta Badan La Isweydiiyo",
 			winners: "Guuleystayaasha",
 			language: "Luqadda",
+			submit: "Jawaabta Soo Gudbi",
 		},
 	} as any;
 
-	const questions = {
+	const categories = {
 		en: [
-			{
-				question: "What is the closest planet to the Sun?",
-				options: ["Venus", "Mercury", "Mars", "Earth"],
-				answer: 1,
-			},
-			{
-				question: "How many moons does Mars have?",
-				options: ["0", "1", "2", "4"],
-				answer: 2,
-			},
-			// ... add more questions
+			{ name: "Space", icon: Star },
+			{ name: "Geography", icon: Globe },
+			{ name: "History", icon: Book },
+			{ name: "Math", icon: Calculator },
 		],
+		am: [
+			{ name: "ጠፈር", icon: Star },
+			{ name: "ጂኦግራፊ", icon: Globe },
+			{ name: "ታሪክ", icon: Book },
+			{ name: "ሂሳብ", icon: Calculator },
+		],
+		om: [
+			{ name: "Qilleensa", icon: Star },
+			{ name: "Jiograafii", icon: Globe },
+			{ name: "Seenaa", icon: Book },
+			{ name: "Herrega", icon: Calculator },
+		],
+		ti: [
+			{ name: "ጠፈር", icon: Star },
+			{ name: "ጆግራፊ", icon: Globe },
+			{ name: "ታሪኽ", icon: Book },
+			{ name: "ሒሳብ", icon: Calculator },
+		],
+		so: [
+			{ name: "Hawada", icon: Star },
+			{ name: "Juqraafi", icon: Globe },
+			{ name: "Taariikh", icon: Book },
+			{ name: "Xisaab", icon: Calculator },
+		],
+	};
+
+	const questions = {
+		en: {
+			Space: [
+				{
+					type: "multipleChoice",
+					question: "What is the closest planet to the Sun?",
+					options: ["Venus", "Mercury", "Mars", "Earth"],
+					answer: 1,
+				},
+				{
+					type: "arrange",
+					question:
+						"Arrange the planets in order from closest to farthest from the Sun:",
+					items: [
+						"Mercury",
+						"Venus",
+						"Earth",
+						"Mars",
+						"Jupiter",
+						"Saturn",
+						"Uranus",
+						"Neptune",
+					],
+				},
+				// ... (add more space questions)
+			],
+			Geography: [
+				{
+					type: "multipleChoice",
+					question: "What is the capital of Japan?",
+					options: ["Seoul", "Tokyo", "Beijing", "Bangkok"],
+					answer: 1,
+				},
+				{
+					type: "arrange",
+					question:
+						"Arrange these countries from largest to smallest by land area:",
+					items: ["Russia", "Canada", "China", "United States", "Brazil"],
+				},
+				// ... (add more geography questions)
+			],
+			History: [
+				{
+					question: "Who is known as the first president of the United States?",
+					options: [
+						"Abraham Lincoln",
+						"George Washington",
+						"John Adams",
+						"Thomas Jefferson",
+					],
+					answer: 1,
+				},
+				// ... (add more history questions)
+			],
+			Math: [
+				{
+					question: "What is the square root of 144?",
+					options: ["10", "12", "14", "16"],
+					answer: 1,
+				},
+				// ... (add more math questions)
+			],
+		},
+
 		am: [
 			{
 				question: "ከፀሐይ በጣም የቀረበው ፕላኔት የትኛው ነው?",
@@ -105,7 +195,21 @@ export const getPageDetails = async () => {
 				options: ["0", "1", "2", "4"],
 				answer: 2,
 			},
-			// ... add more questions in Amharic
+			{
+				question: "የ2018 ዓ.ም የእግር ኳስ ዓለም ዋንጫ የማሸነፈው ሃገር የትኛው ነበር?",
+				options: ["ብራዚል", "ጀርመን", "ፈረንሳይ", "አርጀንቲና"],
+				answer: 2,
+			},
+			{
+				question: "የጃፓን ከተማ ዋና ከተማ ማን ነው?",
+				options: ["ሶል", "ቶኪዮ", "ቤዂንግ", "ባንኮክ"],
+				answer: 1,
+			},
+			{
+				question: "አሜሪካን ከፍተኛ ስራ ያረገው የመጀመሪያው ፕሬዝዳንት ማን ነው?",
+				options: ["አብራሃም ሊንኮልን", "ጆርጅ ዋሽንግተን", "ጆን አዳምስ", "ቶማስ ጀፈርሰን"],
+				answer: 1,
+			},
 		],
 		om: [
 			{
@@ -118,7 +222,26 @@ export const getPageDetails = async () => {
 				options: ["0", "1", "2", "4"],
 				answer: 2,
 			},
-			// ... add more questions in Oromifa
+			{
+				question: "Guddichi tapha Kubbaa Miillaa 2018 moo'ate kam?",
+				options: ["Biraaziil", "Jarmanii", "Faransaayii", "Arjentiinaa"],
+				answer: 2,
+			},
+			{
+				question: "Kaaba Tokkoffaa Jaappaan maali?",
+				options: ["Sool", "Tokiyoo", "Beijing", "Baankook"],
+				answer: 1,
+			},
+			{
+				question: "Prezidaantii Amerikaa jalqabaa eenyu dha?",
+				options: [
+					"Abrahaam Liinkoolin",
+					"George Washington",
+					"John Adams",
+					"Thomas Jefferson",
+				],
+				answer: 1,
+			},
 		],
 		ti: [
 			{
@@ -131,7 +254,21 @@ export const getPageDetails = async () => {
 				options: ["0", "1", "2", "4"],
 				answer: 2,
 			},
-			// ... add more questions in Tigrigna
+			{
+				question: "ኣብ 2018 ዓ.ም ዓለም ዋንጫ ስነተጫወት ዝረኽብ ሃገር እንታይ እያ?",
+				options: ["ብራዚል", "ጀርመን", "ፈረንሳይ", "አርጀንቲና"],
+				answer: 2,
+			},
+			{
+				question: "ናይ ጃፓን ዋና ከተማ ስም እንታይ እዩ?",
+				options: ["ሶል", "ቶኪዮ", "ቤጂንግ", "ባንኮክ"],
+				answer: 1,
+			},
+			{
+				question: "ንኢድ ዩናይትድ ስቴትስ ቀዳማይ ፕሬዝደንት ማን እዩ?",
+				options: ["አብርሃም ሊንኮልን", "ጆርጅ ዋሽንግተን", "ጆን አዳምስ", "ቶማስ ጄፈርሰን"],
+				answer: 1,
+			},
 		],
 		so: [
 			{
@@ -144,7 +281,26 @@ export const getPageDetails = async () => {
 				options: ["0", "1", "2", "4"],
 				answer: 2,
 			},
-			// ... add more questions in Somali
+			{
+				question: "Yaa qaaday koobkii adduunka ee FIFA 2018?",
+				options: ["Brazil", "Germany", "France", "Argentina"],
+				answer: 2,
+			},
+			{
+				question: "Caasimada Japan waa tee?",
+				options: ["Seoul", "Tokyo", "Beijing", "Bangkok"],
+				answer: 1,
+			},
+			{
+				question: "Madaxweynihii ugu horreeyay ee Mareykanka waa kuma?",
+				options: [
+					"Abraham Lincoln",
+					"George Washington",
+					"John Adams",
+					"Thomas Jefferson",
+				],
+				answer: 1,
+			},
 		],
 	} as any;
 
@@ -164,11 +320,11 @@ export const getPageDetails = async () => {
 		{ name: "Kenenisa Bekele", phone: "0955678901", prize: "Weekly Prize" },
 	];
 
-	// const prizes = [
-	// 	{ name: "Daily Prize", value: "500 ETB Airtime", icon: Gift },
-	// 	{ name: "Weekly Prize", value: "5000 ETB Cash", icon: Zap },
-	// 	{ name: "Monthly Prize", value: "Samsung Galaxy S21", icon: Star },
-	// ];
+	const prizes = [
+		{ name: "Daily Prize", value: "500 ETB Airtime", icon: Gift },
+		{ name: "Weekly Prize", value: "5000 ETB Cash", icon: Zap },
+		{ name: "Monthly Prize", value: "Samsung Galaxy S21", icon: Star },
+	];
 
 	const faqItems = [
 		{
@@ -199,8 +355,24 @@ export const getPageDetails = async () => {
 		},
 	];
 
+	// Add category translations
+	Object.keys(translations).forEach((lang) => {
+		translations[lang].selectCategory = {
+			en: "Select a category",
+			am: "ምድብ ይምረጡ",
+			om: "Gosa filadhu",
+			ti: "ምድብ ምረጽ",
+			so: "Dooro qaybta",
+		}[lang];
+	});
+
 	return {
 		translations,
 		questions,
+		categories,
+		languageNames,
+		winners,
+		prizes,
+		faqItems,
 	};
 };
