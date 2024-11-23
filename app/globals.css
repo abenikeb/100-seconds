@@ -45,3 +45,61 @@
 		/* @apply font-heading; */
 	}
 }
+
+/* styles for the sliders */
+.slick-list {
+	margin: 0 -10px;
+}
+
+.slick-slide > div {
+	padding: 0 10px;
+}
+
+.prize-slider .slick-slide,
+.winners-slider .slick-slide {
+	opacity: 0.5;
+	transition: opacity 0.3s ease;
+}
+
+.prize-slider .slick-center,
+.winners-slider .slick-center {
+	opacity: 1;
+}
+
+.prize-slider .slick-slide > div,
+.winners-slider .slick-slide > div {
+	display: flex;
+	justify-content: center;
+}
+
+/* Animation classes */
+@keyframes blob {
+	0% {
+		transform: translate(0px, 0px) scale(1);
+	}
+	33% {
+		transform: translate(30px, -50px) scale(1.1);
+	}
+	66% {
+		transform: translate(-20px, 20px) scale(0.9);
+	}
+	100% {
+		transform: translate(0px, 0px) scale(1);
+	}
+}
+
+.animate-blob {
+	animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+	animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+	animation-delay: 4s;
+}
+
+.animate-spin-slow {
+	animation: spin 6s linear infinite;
+}

@@ -18,6 +18,12 @@ export const getPageDetails = async () => {
 			winners: "Winners",
 			language: "Language",
 			submit: "Submit Answer",
+			credit: "Credit",
+			phone: "Phone",
+			requestCredit: "Request Credit",
+			insufficientCredit:
+				"Insufficient credit. Please request more credit to play.",
+			creditRequested: "Credit request sent. Please wait for approval.",
 		},
 		am: {
 			title: "የ100 ሰኮንድ ጨዋታ",
@@ -34,6 +40,11 @@ export const getPageDetails = async () => {
 			winners: "አሸናፊዎች",
 			language: "ቋንቋ",
 			submit: "መልስ አስገባ",
+			credit: "ክሬዲት",
+			phone: "ስልክ",
+			requestCredit: "ክሬዲት ይጠይቁ",
+			insufficientCredit: "በቂ ክሬዲት የለም። እባክዎ ለመጫወት ተጨማሪ ክሬዲት ይጠይቁ።",
+			creditRequested: "የክሬዲት ጥያቄ ተልኳል። እባክዎ ለፈቃድ ይጠብቁ።",
 		},
 		om: {
 			title: "Taphi Qorannoo Qilleensaa",
@@ -51,6 +62,12 @@ export const getPageDetails = async () => {
 			winners: "Injifattoota",
 			language: "Afaan",
 			submit: "Deebii Galchi",
+			credit: "Kireediitii",
+			phone: "Bilbila",
+			requestCredit: "Kireediitii Gaafadhu",
+			insufficientCredit:
+				"Kireediitiin gahaa miti. Maaloo taphachuuf kireediitii dabalaa gaafadhu.",
+			creditRequested: "Gaaffiin kireediitii ergameera. Maaloo hayyama eegi.",
 		},
 		ti: {
 			title: "ናይ ጠፈር ፈተና ጸወታ",
@@ -67,6 +84,11 @@ export const getPageDetails = async () => {
 			winners: "ተዓወትቲ",
 			language: "ቋንቋ",
 			submit: "መልሲ ኣእቱ",
+			credit: "ክረዲት",
+			phone: "ተሌፎን",
+			requestCredit: "ክረዲት ሕተት",
+			insufficientCredit: "ዘይኣኻሊ ክረዲት። በጃኹም ንምጽዋት ተወሳኺ ክረዲት ሕተቱ።",
+			creditRequested: "ሕቶ ክረዲት ተላኢኹ። በጃኹም ንፍቓድ ተጸበዩ።",
 		},
 		so: {
 			title: "Ciyaarta Imtixaanka Hawada",
@@ -84,6 +106,12 @@ export const getPageDetails = async () => {
 			winners: "Guuleystayaasha",
 			language: "Luqadda",
 			submit: "Jawaabta Soo Gudbi",
+			credit: "Deyn",
+			phone: "Telefoon",
+			requestCredit: "Codso Deyn",
+			insufficientCredit:
+				"Deyn aan ku filnayn. Fadlan codso deyn dheeraad ah si aad u ciyaarto.",
+			creditRequested: "Codsiga deynta waa la diray. Fadlan sug oggolaansho.",
 		},
 	} as any;
 
@@ -313,11 +341,11 @@ export const getPageDetails = async () => {
 	};
 
 	const winners = [
-		{ name: "Abebe Bikila", phone: "0911234567", prize: "Daily Prize" },
-		{ name: "Tirunesh Dibaba", phone: "0922345678", prize: "Weekly Prize" },
-		{ name: "Haile Gebrselassie", phone: "0933456789", prize: "Monthly Prize" },
-		{ name: "Derartu Tulu", phone: "0944567890", prize: "Daily Prize" },
-		{ name: "Kenenisa Bekele", phone: "0955678901", prize: "Weekly Prize" },
+		{ name: "Abebe Bikila", phone: "0911****67", prize: "Daily Prize" },
+		{ name: "Tirunesh Dibaba", phone: "0922****78", prize: "Weekly Prize" },
+		{ name: "Haile Gebrselassie", phone: "093****789", prize: "Monthly Prize" },
+		{ name: "Derartu Tulu", phone: "0944****90", prize: "Daily Prize" },
+		{ name: "Kenenisa Bekele", phone: "095****901", prize: "Weekly Prize" },
 	];
 
 	const prizes = [
