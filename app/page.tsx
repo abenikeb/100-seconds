@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Reorder } from "framer-motion";
+
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { CardHeader } from "@/components/ui/card";
@@ -26,6 +27,7 @@ import {
 	Phone,
 	ArrowUpDown,
 	PlusCircle,
+	CreditCard,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -345,11 +347,21 @@ export default function Component() {
 						</h1>
 					</div>
 					<nav className="hidden md:flex items-center space-x-4">
-						<a
-							href="#"
+						<Link
+							href="/"
 							className="text-blue-600 hover:text-blue-800 transition-colors">
 							{translations[language].home}
-						</a>
+						</Link>
+						<Link
+							href="/credit"
+							className="text-blue-600 hover:text-blue-800 transition-colors">
+							{translations[language].credits}
+						</Link>
+						<Link
+							href="/purchase"
+							className="text-blue-600 hover:text-blue-800 transition-colors">
+							{translations[language].buyCredits}
+						</Link>
 						<Dialog>
 							<DialogTrigger asChild>
 								<button className="text-blue-600 hover:text-blue-800 transition-colors">
@@ -443,11 +455,27 @@ export default function Component() {
 										</span>
 									</div>
 								)}
-								<a
-									href="#"
-									className="text-lg text-blue-600 hover:text-blue-800 transition-colors">
+								<Link
+									href="/"
+									className="text-blue-600 hover:text-blue-800 transition-colors">
 									{translations[language].home}
-								</a>
+								</Link>
+								{session?.user?.name && (
+									<>
+										{" "}
+										<Link
+											href="/credit"
+											className="text-blue-600 hover:text-blue-800 transition-colors">
+											{translations[language].credits}
+										</Link>
+										<Link
+											href="/purchase"
+											className="text-blue-600 hover:text-blue-800 transition-colors">
+											{translations[language].buyCredits}
+										</Link>
+									</>
+								)}
+
 								<Dialog>
 									<DialogTrigger asChild>
 										<button className="text-lg text-left text-blue-600 hover:text-blue-800 transition-colors">
@@ -526,12 +554,28 @@ export default function Component() {
 									</p>
 									<p className="text-blue-600">{session?.user.email as any}</p>
 								</div>
-								<Button
+								<div className="space-x-2">
+									{/* <Button
+										onClick={requestCredit}
+										className="bg-green-500 hover:bg-green-600 text-white">
+										<PlusCircle className="mr-2 h-4 w-4" />{" "}
+										{translations[language].requestCredit}
+									</Button> */}
+									<Button
+										asChild
+										className="bg-blue-500 hover:bg-blue-600 text-white">
+										<Link href="/purchase">
+											<CreditCard className="mr-2 h-4 w-4" />{" "}
+											{translations[language].requestCredit}
+										</Link>
+									</Button>
+								</div>
+								{/* <Button
 									onClick={requestCredit}
 									className="bg-green-500 hover:bg-green-600 text-white">
 									<PlusCircle className="mr-2 h-4 w-4" />{" "}
 									{translations[language].requestCredit}
-								</Button>
+								</Button> */}
 							</div>
 						)}
 

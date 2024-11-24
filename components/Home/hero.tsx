@@ -42,10 +42,11 @@ const Hero = () => {
 				<div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4">
 					<div className="text-center sm:text-left">
 						<h1 className="text-2xl sm:text-3xl font-bold leading-tight text-white mb-2">
-							Welcome to <span className="text-[#febe66]">Biisho Market</span>
+							Welcome to{" "}
+							<span className="text-[#febe66]">Quizcroll Market</span>
 						</h1>
 						<p className="text-sm sm:text-base text-white font-light">
-							Discover amazing deals on your favorite Biisho products
+							Discover amazing deals on your favorite Quizcroll products
 						</p>
 					</div>
 					<Button

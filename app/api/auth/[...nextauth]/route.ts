@@ -109,7 +109,7 @@ const handler = NextAuth({
 		async redirect({ url, baseUrl }) {
 			console.log({ url, baseUrl });
 			// Check if the URL is the base URL, then redirect to Home
-			return url.startsWith(baseUrl) ? `${baseUrl}/profile` : url;
+			return url.startsWith(baseUrl) ? `${baseUrl}/` : url;
 			// return url === baseUrl ? `${baseUrl}/Home` : url;
 		},
 	},

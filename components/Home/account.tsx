@@ -90,7 +90,7 @@ export default function Account() {
 		<div className="flex h-auto w-full ">
 			{/* <div className="flex-1 hidden lg:flex lg:flex-col lg:justify-center lg:items-center">
 				<div className="text-center text-white mb-8">
-					<h1 className="text-5xl font-bold mb-4">Welcome to Biisho</h1>
+					<h1 className="text-5xl font-bold mb-4">Welcome to Quizcroll</h1>
 					<p className="text-xl">{`Your gateway to seamless connections`}</p>
 				</div>
 				<Image
@@ -145,7 +145,7 @@ export default function Account() {
 						<div className="w-full">
 							<div className="text-center mb-8">
 								<h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-									Welcome to Biisho
+									Welcome to Quizcroll
 								</h2>
 								<p className=" text-sm text-gray-600">{`Let's get you found!`}</p>
 

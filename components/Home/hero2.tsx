@@ -33,7 +33,9 @@ const Hero2 = () => {
 							</ul>
 						</div>
 						<div>
-							<h3 className="text-lg font-semibold mb-4">About BiishoMarket</h3>
+							<h3 className="text-lg font-semibold mb-4">
+								About QuizcrollMarket
+							</h3>
 							<ul className="space-y-2">
 								<li>
 									<Link
@@ -100,7 +102,7 @@ const Hero2 = () => {
 						</div>
 					</div>
 					<div className="mt-8 text-center text-sm">
-						<p>&copy; 2024 BiishoMarket. All rights reserved.</p>
+						<p>&copy; 2024 QuizcrollMarket. All rights reserved.</p>
 					</div>
 				</div>
 			</footer>
