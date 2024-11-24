@@ -1,4 +1,13 @@
-import { Star, Zap, Gift, Globe, Book, Calculator } from "lucide-react";
+import {
+	Star,
+	Zap,
+	Gift,
+	Globe,
+	Book,
+	Calculator,
+	Music,
+	Image,
+} from "lucide-react";
 
 export const getPageDetails = async () => {
 	const translations = {
@@ -174,6 +183,8 @@ export const getPageDetails = async () => {
 			{ name: "Geography", icon: Globe },
 			{ name: "History", icon: Book },
 			{ name: "Math", icon: Calculator },
+			{ name: "Music", icon: Music },
+			{ name: "Art", icon: Image },
 		],
 		am: [
 			{ name: "ጠፈር", icon: Star },
@@ -214,18 +225,39 @@ export const getPageDetails = async () => {
 					type: "arrange",
 					question:
 						"Arrange the planets in order from closest to farthest from the Sun:",
-					items: [
-						"Mercury",
-						"Venus",
-						"Earth",
-						"Mars",
-						"Jupiter",
-						"Saturn",
-						"Uranus",
-						"Neptune",
-					],
+					items: ["Mercury", "Venus", "Earth", "Mars", "Jupiter"],
+				},
+				{
+					type: "image",
+					question: "What celestial body is shown in this image?",
+					imageUrl: "/assets/images/questions/q1.jpeg?height=300&width=300",
+					options: ["Earth", "Mars", "Jupiter", "Saturn"],
+					answer: 1,
+				},
+				{
+					type: "sound",
+					question: "What space phenomenon does this sound represent?",
+					audioUrl: "/assets/images/questions/q1-sounds.mp3",
+					options: ["Black Hole", "Supernova", "Pulsar", "Solar Wind"],
+					answer: 2,
 				},
 				// ... (add more space questions)
+			],
+			Music: [
+				{
+					type: "sound",
+					question: "Which instrument is playing in this audio clip?",
+					audioUrl: "/instrument-sound.mp3",
+					options: ["Piano", "Guitar", "Violin", "Flute"],
+					answer: 0,
+				},
+				{
+					type: "image",
+					question: "What is the name of this musical notation symbol?",
+					imageUrl: "/placeholder.svg?height=100&width=100",
+					options: ["Treble Clef", "Bass Clef", "Alto Clef", "Tenor Clef"],
+					answer: 0,
+				},
 			],
 			Geography: [
 				{

@@ -156,7 +156,9 @@ export default function Component() {
 			questions[language][selectedCategory][currentQuestion];
 		let isCorrect = false;
 
-		if (currentQuestionData.type === "multipleChoice") {
+		if (
+			["multipleChoice", "image", "sound"].includes(currentQuestionData.type)
+		) {
 			isCorrect = selectedAnswer === currentQuestionData.answer;
 		} else if (currentQuestionData.type === "arrange") {
 			isCorrect =
@@ -166,11 +168,7 @@ export default function Component() {
 
 		setUserAnswers([
 			...userAnswers,
-			{
-				question: currentQuestion,
-				answer: selectedAnswer,
-				correct: isCorrect,
-			},
+			{ question: currentQuestion, answer: selectedAnswer, correct: isCorrect },
 		]);
 
 		if (isCorrect) {
@@ -645,6 +643,112 @@ export default function Component() {
 											.question
 									}
 								</h2>
+								{["multipleChoice", "image", "sound"].includes(
+									questions[language][selectedCategory][currentQuestion].type
+								) && (
+									<>
+										{questions[language][selectedCategory][currentQuestion]
+											.type === "image" && (
+											<div className="mb-4">
+												<img
+													src={
+														questions[language][selectedCategory][
+															currentQuestion
+														].imageUrl
+													}
+													alt="Question Image"
+													className="mx-auto max-w-full h-auto rounded-lg shadow-md"
+												/>
+											</div>
+										)}
+										{questions[language][selectedCategory][currentQuestion]
+											.type === "sound" && (
+											<div className="mb-4">
+												<audio controls className="w-full">
+													<source
+														src={
+															questions[language][selectedCategory][
+																currentQuestion
+															].audioUrl
+														}
+														type="audio/mpeg"
+													/>
+													Your browser does not support the audio element.
+												</audio>
+											</div>
+										)}
+										<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+											{questions[language][selectedCategory][
+												currentQuestion
+											].options.map((option: string, index: number) => (
+												<Button
+													key={index}
+													onClick={() => handleAnswer(index)}
+													className="text-lg py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors duration-300">
+													{option}
+												</Button>
+											))}
+										</div>
+									</>
+								)}
+								{questions[language][selectedCategory][currentQuestion].type ===
+									"arrange" && (
+									<>
+										<Reorder.Group
+											axis="y"
+											values={arrangeItems}
+											onReorder={setArrangeItems}
+											className="space-y-2">
+											{arrangeItems.map((item) => (
+												<Reorder.Item key={item} value={item}>
+													<div className="bg-blue-100 p-3 rounded-lg cursor-move flex items-center justify-between">
+														<span>{item}</span>
+														<ArrowUpDown className="text-blue-500" />
+													</div>
+												</Reorder.Item>
+											))}
+										</Reorder.Group>
+										<Button
+											onClick={() => handleAnswer(arrangeItems)}
+											className="mt-4 bg-green-500 hover:bg-green-600 text-white">
+											{translations[language].submit}
+										</Button>
+									</>
+								)}
+							</motion.div>
+						)}
+
+						{/* {gameState === "playing" && (
+							<motion.div
+								key={currentQuestion}
+								initial={{ x: 300, opacity: 0 }}
+								animate={{ x: 0, opacity: 1 }}
+								exit={{ x: -300, opacity: 0 }}
+								transition={{ type: "spring", stiffness: 260, damping: 20 }}>
+								<div className="mb-6">
+									<Progress
+										value={(timeLeft / 100) * 100}
+										className="h-3 bg-blue-200"
+									/>
+									<div className="flex justify-between mt-2">
+										<p className="text-blue-600">
+											{translations[language].timeLeft}: {timeLeft}s
+										</p>
+										<Badge
+											variant="secondary"
+											className="bg-blue-100 text-blue-800">
+											{translations[language].question} {currentQuestion + 1}{" "}
+											{translations[language].of}{" "}
+											{questions[language][selectedCategory].length}
+										</Badge>
+									</div>
+								</div>
+								<h2 className="text-2xl font-semibold mb-4 text-blue-800">
+									{
+										questions[language][selectedCategory][currentQuestion]
+											.question
+									}
+								</h2>
 								{questions[language][selectedCategory][currentQuestion].type ===
 									"multipleChoice" && (
 									<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -686,7 +790,7 @@ export default function Component() {
 									</Button>
 								)}
 							</motion.div>
-						)}
+						)} */}
 
 						{gameState === "end" && (
 							<motion.div
