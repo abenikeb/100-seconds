@@ -46,8 +46,6 @@ import {
 } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
 	Accordion,
 	AccordionContent,
@@ -58,6 +56,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getPageDetails } from "@lib/data";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Component() {
 	const [gameState, setGameState] = useState("start");
@@ -66,8 +65,6 @@ export default function Component() {
 	const [score, setScore] = useState(0);
 	const [timeLeft, setTimeLeft] = useState(100);
 	const [language, setLanguage] = useState("en");
-	// const [isSubscribed, setIsSubscribed] = useState(false);
-	const [showPayment, setShowPayment] = useState(false);
 	const [translations, setTranslations] = useState<any>(null);
 	const [questions, setQuestions] = useState<any>(null);
 	const [categories, setCategories] = useState<any>(null);
@@ -78,7 +75,6 @@ export default function Component() {
 	const [userAnswers, setUserAnswers] = useState<any[]>([]);
 	const [arrangeItems, setArrangeItems] = useState<string[]>([]);
 	const [userCredit, setUserCredit] = useState(100);
-	const [userPhone, setUserPhone] = useState("09123456789");
 	const { data: session } = useSession<any>();
 
 	const prizeListRef = useRef(null);
@@ -334,10 +330,19 @@ export default function Component() {
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-sky-200 via-blue-100 to-indigo-100 flex flex-col">
 			<header className="w-full bg-transparent shadow-md p-3">
-				<div className="max-w-6xl mx-auto flex justify-between items-center">
+				<div className="max-w-7xl mx-auto flex justify-between items-center">
+					<div className="-mr-6">
+						<Image
+							src="/assets/images/tele-logo.png"
+							alt="logo"
+							width={110}
+							height={50}
+						/>
+					</div>
 					<div className="flex items-center space-x-2">
 						<Zap className="h-8 w-8 text-lime-500" />
-						<h1 className="text-2xl font-bold text-blue-600">
+
+						<h1 className="text-xl font-bold text-blue-600">
 							{translations[language].title}
 						</h1>
 					</div>
@@ -529,7 +534,7 @@ export default function Component() {
 				</div>
 			</header>
 
-			<main className="flex-grow flex items-center justify-center p-4 relative overflow-hidden">
+			<main className="flex-grow flex flex-col items-center justify-start p-4 relative overflow-hidden">
 				<div className="absolute inset-0 overflow-hidden pointer-events-none">
 					<div className="absolute top-1/4 left-1/4 w-64 h-64 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
 					<div className="absolute top-1/3 right-1/4 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -538,30 +543,29 @@ export default function Component() {
 					<Sparkles className="absolute top-1/5 left-1/2 w-20 h-20 text-blue-400 opacity-20 animate-spin-slow" />
 					<Zap className="absolute bottom-1/4 right-1/4 w-16 h-16 text-pink-400 opacity-20 animate-bounce" />
 				</div>
+				{session?.user && (
+					<div className="w-full mb-6 p-4 bg-gray-100/50 rounded-lg shadow-inner flex justify-between items-center z-50">
+						<div>
+							<p className="text-blue-800 font-semibold">
+								{translations[language].credit}: {userCredit}
+							</p>
+							<p className="text-blue-600">{session?.user.email as any}</p>
+						</div>
+						<div className="space-x-2">
+							<Button
+								asChild
+								className="bg-blue-500 hover:bg-blue-600 text-white">
+								<Link href="/purchase">
+									<CreditCard className="mr-2 h-4 w-4" />{" "}
+									{translations[language].requestCredit}
+								</Link>
+							</Button>
+						</div>
+					</div>
+				)}
 
 				<Card className="max-w-4xl w-full bg-white/60 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl py-8 px-0 z-10">
 					<CardContent>
-						{session?.user && (
-							<div className="mb-6 p-4 bg-blue-100 rounded-lg shadow-inner flex justify-between items-center">
-								<div>
-									<p className="text-blue-800 font-semibold">
-										{translations[language].credit}: {userCredit}
-									</p>
-									<p className="text-blue-600">{session?.user.email as any}</p>
-								</div>
-								<div className="space-x-2">
-									<Button
-										asChild
-										className="bg-blue-500 hover:bg-blue-600 text-white">
-										<Link href="/purchase">
-											<CreditCard className="mr-2 h-4 w-4" />{" "}
-											{translations[language].requestCredit}
-										</Link>
-									</Button>
-								</div>
-							</div>
-						)}
-
 						{gameState === "start" && (
 							<motion.div
 								initial={{ opacity: 0, y: 20 }}
@@ -698,7 +702,7 @@ export default function Component() {
 									{translations[language].of}{" "}
 									{questions[language][selectedCategory].length}
 								</p>
-								<div className="mb-6">
+								{/* <div className="mb-6">
 									{userAnswers.map((answer, index) => (
 										<div
 											key={index}
@@ -714,7 +718,7 @@ export default function Component() {
 											<p>{answer.correct ? "✅ Correct" : "❌ Incorrect"}</p>
 										</div>
 									))}
-								</div>
+								</div> */}
 								<div className="flex justify-center space-x-4">
 									<Button
 										onClick={() => setGameState("category")}
