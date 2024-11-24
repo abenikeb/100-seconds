@@ -1,19 +1,39 @@
 import { WinnersSection } from "@/components/Home/WinnersSection";
+import { HeaderWinner } from "@/components/Home/HeaderWinner";
 
 // This data would typically come from an API or database
-const winners = [
-	{ name: "Alice Johnson", phone: "+1 234-567-8901", prize: "iPhone 13 Pro" },
-	{ name: "Bob Smith", phone: "+1 345-678-9012", prize: "MacBook Air" },
-	{ name: "Charlie Brown", phone: "+1 456-789-0123", prize: "AirPods Pro" },
-	{ name: "Diana Prince", phone: "+1 567-890-1234", prize: "iPad Mini" },
-	{ name: "Ethan Hunt", phone: "+1 678-901-2345", prize: "Apple Watch" },
-	{ name: "Fiona Gallagher", phone: "+1 789-012-3456", prize: "HomePod Mini" },
-];
+const winners = {
+	instant: [
+		{
+			name: "Abebe Kebede",
+			phone: "+251 91* *** **01",
+			prize: "iPhone 13 Pro",
+		},
+		{ name: "Tigist Haile", phone: "+251 92* *** **12", prize: "MacBook Air" },
+		{ name: "Dawit Tadesse", phone: "+251 93* *** **23", prize: "AirPods Pro" },
+	],
+	weekly: [
+		{
+			name: "Hiwot Gebremariam",
+			phone: "+251 94* *** **34",
+			prize: "iPad Mini",
+		},
+		{
+			name: "Yohannes Alemu",
+			phone: "+251 95* *** **45",
+			prize: "Apple Watch",
+		},
+		{ name: "Meron Assefa", phone: "+251 96* *** **56", prize: "HomePod Mini" },
+	],
+};
 
 const translations = {
 	en: {
 		winners: "Winners",
 		prize: "Prize",
+		instantWinners: "Instant Winners",
+		weeklyWinners: "This Week's Winners",
+		back: "Back",
 	},
 	// Add other languages as needed
 };
@@ -21,6 +41,7 @@ const translations = {
 export default function WinnersPage() {
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+			<HeaderWinner translations={translations} language="en" />
 			<WinnersSection
 				winners={winners}
 				translations={translations}

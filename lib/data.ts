@@ -24,6 +24,7 @@ export const getPageDetails = async () => {
 			insufficientCredit:
 				"Insufficient credit. Please request more credit to play.",
 			creditRequested: "Credit request sent. Please wait for approval.",
+			seeAll: "See All",
 		},
 		am: {
 			title: "የQuizcroll ጨዋታ",
@@ -45,6 +46,7 @@ export const getPageDetails = async () => {
 			requestCredit: "ክሬዲት ይጠይቁ",
 			insufficientCredit: "በቂ ክሬዲት የለም። እባክዎ ለመጫወት ተጨማሪ ክሬዲት ይጠይቁ።",
 			creditRequested: "የክሬዲት ጥያቄ ተልኳል። እባክዎ ለፈቃድ ይጠብቁ።",
+			seeAll: "ሁሉንም ተመልከት",
 		},
 		om: {
 			title: "Taphi Qorannoo Qilleensaa",
@@ -341,9 +343,9 @@ export const getPageDetails = async () => {
 	};
 
 	const winners = [
-		{ name: "Abebe Bikila", phone: "0911****67", prize: "Daily Prize" },
-		{ name: "Tirunesh Dibaba", phone: "0922****78", prize: "Weekly Prize" },
-		{ name: "Haile Gebrselassie", phone: "093****789", prize: "Monthly Prize" },
+		{ name: "Abebe Bikila", phone: "0911****67", prize: "iPhone 13 Pro" },
+		{ name: "Tirunesh Dibaba", phone: "0922****78", prize: "25,000 Birr" },
+		{ name: "Haile Gebrselassie", phone: "093****789", prize: "Samsung A15" },
 		{ name: "Derartu Tulu", phone: "0944****90", prize: "Daily Prize" },
 		{ name: "Kenenisa Bekele", phone: "095****901", prize: "Weekly Prize" },
 	];

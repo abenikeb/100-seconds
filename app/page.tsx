@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Reorder } from "framer-motion";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { CardHeader } from "@/components/ui/card";
 import {
 	Carousel,
 	CarouselContent,
@@ -53,6 +55,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getPageDetails } from "@lib/data";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Component() {
 	const [gameState, setGameState] = useState("start");
@@ -269,42 +272,63 @@ export default function Component() {
 
 	const WinnersSection = ({ winners, translations, language }: any) => {
 		return (
-			<section className="bg-white py-12">
-				<div className="max-w-6xl mx-auto px-4">
-					<h2 className="text-3xl font-bold text-center mb-8 text-blue-600">
-						{translations[language].winners}
-					</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{winners.map((winner: any, index: any) => (
-							<div
-								key={index}
-								className="bg-gradient-to-br from-blue-100 to-purple-100 p-6 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105">
-								<div className="flex items-center mb-4">
-									<div className="h-16 w-16 border-4 border-white shadow-lg rounded-full overflow-hidden">
-										<img
-											src={`https://i.pravatar.cc/150?img=${index + 1}`}
-											alt={winner.name}
-											className="h-full w-full object-cover"
-										/>
-									</div>
-									<div className="ml-4">
-										<h3 className="text-xl font-semibold text-blue-800">
-											{winner.name}
-										</h3>
-										<p className="text-purple-600">{winner.phone}</p>
-									</div>
-								</div>
-								<div className="bg-white bg-opacity-50 p-4 rounded-lg">
-									<p className="text-lg font-medium text-blue-700">
-										{translations[language].prize}:{" "}
-										<span className="text-purple-600 font-bold">
-											{winner.prize}
-										</span>
-									</p>
-								</div>
-							</div>
-						))}
+			<section className="bg-gradient-to-r from-blue-50 to-purple-50 py-12">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="flex justify-between items-center mb-8">
+						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+							{translations[language].winners}
+						</h2>
+						<Link href="/winners" passHref>
+							<Button
+								variant="outline"
+								className="bg-white/50 hover:bg-white/80 text-blue-600 hover:text-blue-700 border-blue-300">
+								{translations[language].seeAll}
+							</Button>
+						</Link>
 					</div>
+					<ScrollArea className="w-full whitespace-nowrap rounded-xl">
+						<div className="flex space-x-4 pb-4">
+							{winners.map((winner: any, index: any) => (
+								<Card
+									key={index}
+									className="w-[300px] flex-shrink-0 bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-all duration-300">
+									<CardContent className="p-4">
+										<div className="flex items-center space-x-4 mb-3">
+											<Avatar className="h-12 w-12 border-2 border-white shadow-md">
+												<AvatarImage
+													src={`https://i.pravatar.cc/150?img=${index + 1}`}
+													alt={winner.name}
+												/>
+												<AvatarFallback>
+													{winner.name
+														.split(" ")
+														.map((n: any) => n[0])
+														.join("")}
+												</AvatarFallback>
+											</Avatar>
+											<div>
+												<h3 className="text-lg font-semibold text-blue-800 leading-tight">
+													{winner.name}
+												</h3>
+												<p className="text-sm text-purple-600">
+													{winner.phone}
+												</p>
+											</div>
+										</div>
+										<div className="bg-white/70 p-3 rounded-lg shadow-inner">
+											<p className="text-sm font-medium text-blue-700">
+												{translations[language].prize}:{" "}
+												<span className="text-purple-600 font-bold">
+													{winner.prize}
+												</span>
+											</p>
+										</div>
+									</CardContent>
+								</Card>
+							))}
+						</div>
+						<ScrollBar orientation="horizontal" />
+					</ScrollArea>
 				</div>
 			</section>
 		);
@@ -451,27 +475,7 @@ export default function Component() {
 									className="text-lg text-blue-600 hover:text-blue-800 transition-colors">
 									{translations[language].winners}
 								</a>
-								{/* <Dialog>
-									<DialogTrigger asChild>
-										<button className="text-lg text-left text-blue-600 hover:text-blue-800 transition-colors">
-											{translations[language].winners}
-										</button>
-									</DialogTrigger>
-									<DialogContent className="bg-white overflow-y-auto">
-										<DialogHeader>
-											<DialogTitle className="text-blue-600">
-												{translations[language].winners}
-											</DialogTitle>
-										</DialogHeader>
-										<div className="mt-4 overflow-y-auto">
-											<WinnersSection
-												winners={winners}
-												translations={translations}
-												language={language}
-											/>
-										</div>
-									</DialogContent>
-								</Dialog> */}
+
 								<Select onValueChange={(value) => setLanguage(value)}>
 									<SelectTrigger className="w-full bg-white text-blue-600 border-blue-300">
 										<SelectValue
@@ -486,6 +490,7 @@ export default function Component() {
 										))}
 									</SelectContent>
 								</Select>
+
 								{session?.user?.name && (
 									<Button
 										onClick={handleLogout}

@@ -188,7 +188,7 @@ export default function LoginPage() {
 												/>
 												<Button
 													type="submit"
-													className="w-full bg-[#3d506a] hover:bg-blue-700 text-white transition duration-150 ease-in-out h-[2.7rem] text-lg"
+													className="w-full bg-[#3776b6] hover:bg-blue-700 text-white transition duration-150 ease-in-out h-[2.7rem] text-lg"
 													disabled={loading}>
 													{loading ? (
 														<LoadingDots color="#ffffff" />
