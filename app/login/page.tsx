@@ -90,7 +90,7 @@ export default function LoginPage() {
 		<div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
 			<div className="flex-1 hidden lg:flex lg:flex-col lg:justify-center lg:items-center">
 				<div className="text-center text-white mb-8">
-					<h1 className="text-5xl font-bold mb-4">Welcome to Quizcroll</h1>
+					<h1 className="text-5xl font-bold mb-4">Continue to Quizcroll</h1>
 					<p className="text-xl">{`Your gateway to seamless connections`}</p>
 				</div>
 				<Image
@@ -143,9 +143,9 @@ export default function LoginPage() {
 						<div className="w-full max-w-sm">
 							<div className="text-center mb-8">
 								<h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-									Welcome to Quizcroll
+									Continue to Quizcroll
 								</h2>
-								<p className=" text-sm text-gray-600">{`Let's get you found!`}</p>
+								<p className=" text-sm text-gray-600">{`Please log in to your account first!`}</p>
 
 								<Card className="w-full bg-white/10 backdrop-blur-md border-gray-300/80 mt-5">
 									<CardHeader>

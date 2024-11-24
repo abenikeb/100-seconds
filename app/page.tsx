@@ -200,11 +200,6 @@ export default function Component() {
 		}
 	};
 
-	const handleSubscribe = () => {
-		// setIsSubscribed(true);
-		setShowPayment(false);
-	};
-
 	const handleLogout = () => {
 		signOut();
 		setGameState("start");
@@ -555,12 +550,6 @@ export default function Component() {
 									<p className="text-blue-600">{session?.user.email as any}</p>
 								</div>
 								<div className="space-x-2">
-									{/* <Button
-										onClick={requestCredit}
-										className="bg-green-500 hover:bg-green-600 text-white">
-										<PlusCircle className="mr-2 h-4 w-4" />{" "}
-										{translations[language].requestCredit}
-									</Button> */}
 									<Button
 										asChild
 										className="bg-blue-500 hover:bg-blue-600 text-white">
@@ -570,12 +559,6 @@ export default function Component() {
 										</Link>
 									</Button>
 								</div>
-								{/* <Button
-									onClick={requestCredit}
-									className="bg-green-500 hover:bg-green-600 text-white">
-									<PlusCircle className="mr-2 h-4 w-4" />{" "}
-									{translations[language].requestCredit}
-								</Button> */}
 							</div>
 						)}
 
@@ -694,8 +677,7 @@ export default function Component() {
 									"arrange" && (
 									<Button
 										onClick={() => handleAnswer(arrangeItems)}
-										className="mt-4 bg
--green-500 hover:bg-green-600 text-white">
+										className="mt-4 bg-green-500 hover:bg-green-600 text-white">
 										{translations[language].submit}
 									</Button>
 								)}
@@ -749,29 +731,6 @@ export default function Component() {
 						)}
 					</CardContent>
 				</Card>
-
-				{/* <Dialog open={showPayment} onOpenChange={setShowPayment}>
-					<DialogContent className="bg-white">
-						<DialogHeader>
-							<DialogTitle className="text-blue-600">
-								{translations[language].payment}
-							</DialogTitle>
-						</DialogHeader>
-						<div className="mt-4 space-y-4">
-							<div>
-								<Label htmlFor="phone-number">
-									{translations[language].phoneNumber}
-								</Label>
-								<Input id="phone-number" placeholder="09xxxxxxxx" />
-							</div>
-							<Button
-								onClick={handleSubscribe}
-								className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-								{translations[language].subscribeNow} <Phone className="ml-2" />
-							</Button>
-						</div>
-					</DialogContent>
-				</Dialog> */}
 			</main>
 			{/*  Winners Section */}
 			<WinnersSection
