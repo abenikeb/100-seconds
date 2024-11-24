@@ -221,7 +221,7 @@ export default function Component() {
 
 	const PrizeSection = ({ prizes, translations, language }: any) => {
 		return (
-			<div className="mt-12 bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-xl shadow-lg">
+			<div className="mt-10 bg-gradient-to-r from-blue-500 to-purple-600 p-2 m-auto rounded-xl shadow-lg">
 				<h3 className="text-3xl font-bold mb-4 text-white">
 					{translations[language].prizes}
 				</h3>
@@ -263,10 +263,10 @@ export default function Component() {
 
 	const WinnersSection = ({ winners, translations, language }: any) => {
 		return (
-			<section className="bg-gradient-to-r from-blue-50 to-purple-50 py-12">
+			<section className="bg-gradient-to-r from-blue-50 to-purple-50 py-3">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="flex justify-between items-center mb-8">
-						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+					<div className="flex justify-between items-center mb-3">
+						<h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
 							{translations[language].winners}
 						</h2>
 						<Link href="/winners" passHref>
@@ -327,7 +327,7 @@ export default function Component() {
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-sky-200 via-blue-100 to-indigo-100 flex flex-col">
-			<header className="w-full bg-transparent shadow-md p-3">
+			<header className="w-full bg-transparent shadow-md px-3 py-2">
 				<div className="max-w-7xl mx-auto flex justify-between items-center">
 					<div className="-mr-6">
 						<Image
@@ -337,8 +337,8 @@ export default function Component() {
 							height={50}
 						/>
 					</div>
-					<div className="flex items-center space-x-2">
-						<Zap className="h-8 w-8 text-lime-500" />
+					<div className="flex items-center space-x-1">
+						<Zap className="h-7 w-7 text-lime-500" />
 
 						<h1 className="text-xl font-bold text-blue-600">
 							{translations[language].title}
@@ -717,80 +717,6 @@ export default function Component() {
 								)}
 							</motion.div>
 						)}
-
-						{/* {gameState === "playing" && (
-							<motion.div
-								key={currentQuestion}
-								initial={{ x: 300, opacity: 0 }}
-								animate={{ x: 0, opacity: 1 }}
-								exit={{ x: -300, opacity: 0 }}
-								transition={{ type: "spring", stiffness: 260, damping: 20 }}>
-								<div className="mb-6">
-									<Progress
-										value={(timeLeft / 100) * 100}
-										className="h-3 bg-blue-200"
-									/>
-									<div className="flex justify-between mt-2">
-										<p className="text-blue-600">
-											{translations[language].timeLeft}: {timeLeft}s
-										</p>
-										<Badge
-											variant="secondary"
-											className="bg-blue-100 text-blue-800">
-											{translations[language].question} {currentQuestion + 1}{" "}
-											{translations[language].of}{" "}
-											{questions[language][selectedCategory].length}
-										</Badge>
-									</div>
-								</div>
-								<h2 className="text-2xl font-semibold mb-4 text-blue-800">
-									{
-										questions[language][selectedCategory][currentQuestion]
-											.question
-									}
-								</h2>
-								{questions[language][selectedCategory][currentQuestion].type ===
-									"multipleChoice" && (
-									<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-										{questions[language][selectedCategory][
-											currentQuestion
-										].options.map((option: string, index: number) => (
-											<Button
-												key={index}
-												onClick={() => handleAnswer(index)}
-												className="text-lg py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors duration-300">
-												{option}
-											</Button>
-										))}
-									</div>
-								)}
-								{questions[language][selectedCategory][currentQuestion].type ===
-									"arrange" && (
-									<Reorder.Group
-										axis="y"
-										values={arrangeItems}
-										onReorder={setArrangeItems}
-										className="space-y-2">
-										{arrangeItems.map((item) => (
-											<Reorder.Item key={item} value={item}>
-												<div className="bg-blue-100 p-3 rounded-lg cursor-move flex items-center justify-between">
-													<span>{item}</span>
-													<ArrowUpDown className="text-blue-500" />
-												</div>
-											</Reorder.Item>
-										))}
-									</Reorder.Group>
-								)}
-								{questions[language][selectedCategory][currentQuestion].type ===
-									"arrange" && (
-									<Button
-										onClick={() => handleAnswer(arrangeItems)}
-										className="mt-4 bg-green-500 hover:bg-green-600 text-white">
-										{translations[language].submit}
-									</Button>
-								)}
-							</motion.div>
-						)} */}
 
 						{gameState === "end" && (
 							<motion.div
