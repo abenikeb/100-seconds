@@ -19,6 +19,8 @@ export async function authenticateUser(phone: any) {
 			}
 		);
 
+		console.log({ user });
+
 		// Check if the user data exists and has a valid code
 		if (user && user.original) {
 			return {

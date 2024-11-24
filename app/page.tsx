@@ -2,7 +2,14 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Reorder } from "framer-motion";
-import Slider from "react-slick";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import {
@@ -10,9 +17,6 @@ import {
 	Star,
 	Zap,
 	Menu,
-	Globe,
-	Trophy,
-	HelpCircle,
 	Sparkles,
 	Gift,
 	User,
@@ -48,8 +52,7 @@ import {
 } from "@/components/ui/accordion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getPageDetails } from "@lib/data";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import { useRouter } from "next/navigation";
 
 export default function Component() {
 	const [gameState, setGameState] = useState("start");
@@ -58,7 +61,7 @@ export default function Component() {
 	const [score, setScore] = useState(0);
 	const [timeLeft, setTimeLeft] = useState(100);
 	const [language, setLanguage] = useState("en");
-	const [isSubscribed, setIsSubscribed] = useState(false);
+	// const [isSubscribed, setIsSubscribed] = useState(false);
 	const [showPayment, setShowPayment] = useState(false);
 	const [translations, setTranslations] = useState<any>(null);
 	const [questions, setQuestions] = useState<any>(null);
@@ -71,8 +74,10 @@ export default function Component() {
 	const [arrangeItems, setArrangeItems] = useState<string[]>([]);
 	const [userCredit, setUserCredit] = useState(100);
 	const [userPhone, setUserPhone] = useState("09123456789");
+	const { data: session } = useSession<any>();
 
 	const prizeListRef = useRef(null);
+	const router = useRouter();
 
 	useEffect(() => {
 		let timer: NodeJS.Timeout;
@@ -120,11 +125,12 @@ export default function Component() {
 	}, []);
 
 	const startGame = () => {
-		if (isSubscribed && userCredit >= 10) {
+		if (session?.user?.name && userCredit >= 10) {
 			setGameState("category");
 			setUserCredit(userCredit - 10);
-		} else if (!isSubscribed) {
-			setShowPayment(true);
+		} else if (!session?.user?.name) {
+			// setShowPayment(true);
+			router.push("/login");
 		} else {
 			alert(translations[language].insufficientCredit);
 		}
@@ -190,13 +196,12 @@ export default function Component() {
 	};
 
 	const handleSubscribe = () => {
-		// Simulating a successful subscription
-		setIsSubscribed(true);
+		// setIsSubscribed(true);
 		setShowPayment(false);
 	};
 
 	const handleLogout = () => {
-		setIsSubscribed(false);
+		signOut();
 		setGameState("start");
 	};
 
@@ -212,30 +217,6 @@ export default function Component() {
 		return array;
 	};
 
-	const sliderSettings = {
-		dots: false,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 3,
-		slidesToScroll: 1,
-		responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 1,
-				},
-			},
-			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-				},
-			},
-		],
-	};
-
 	if (!translations) {
 		return (
 			<div className="w-full h-full flex justify-center items-center mt-[50%]">
@@ -243,6 +224,91 @@ export default function Component() {
 			</div>
 		);
 	}
+
+	const PrizeSection = ({ prizes, translations, language }: any) => {
+		return (
+			<div className="mt-12 bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-xl shadow-lg">
+				<h3 className="text-3xl font-bold mb-4 text-white">
+					{translations[language].prizes}
+				</h3>
+				<Carousel
+					opts={{
+						align: "start",
+						loop: true,
+					}}
+					className="w-full">
+					<CarouselContent>
+						{prizes.map((prize: any, index: any) => (
+							<CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+								<div className="p-1">
+									<Card>
+										<CardContent className="flex flex-col items-center justify-center p-6">
+											<prize.icon className="h-12 w-12 text-purple-600 mb-2" />
+											<h4 className="text-xl font-semibold text-blue-800 mb-2">
+												{
+													translations[language][
+														prize.name.toLowerCase().replace(" ", "")
+													]
+												}
+											</h4>
+											<p className="text-purple-600 font-bold text-2xl">
+												{prize.value}
+											</p>
+										</CardContent>
+									</Card>
+								</div>
+							</CarouselItem>
+						))}
+					</CarouselContent>
+					<CarouselPrevious />
+					<CarouselNext />
+				</Carousel>
+			</div>
+		);
+	};
+
+	const WinnersSection = ({ winners, translations, language }: any) => {
+		return (
+			<section className="bg-white py-12">
+				<div className="max-w-6xl mx-auto px-4">
+					<h2 className="text-3xl font-bold text-center mb-8 text-blue-600">
+						{translations[language].winners}
+					</h2>
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{winners.map((winner: any, index: any) => (
+							<div
+								key={index}
+								className="bg-gradient-to-br from-blue-100 to-purple-100 p-6 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105">
+								<div className="flex items-center mb-4">
+									<div className="h-16 w-16 border-4 border-white shadow-lg rounded-full overflow-hidden">
+										<img
+											src={`https://i.pravatar.cc/150?img=${index + 1}`}
+											alt={winner.name}
+											className="h-full w-full object-cover"
+										/>
+									</div>
+									<div className="ml-4">
+										<h3 className="text-xl font-semibold text-blue-800">
+											{winner.name}
+										</h3>
+										<p className="text-purple-600">{winner.phone}</p>
+									</div>
+								</div>
+								<div className="bg-white bg-opacity-50 p-4 rounded-lg">
+									<p className="text-lg font-medium text-blue-700">
+										{translations[language].prize}:{" "}
+										<span className="text-purple-600 font-bold">
+											{winner.prize}
+										</span>
+									</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+		);
+	};
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-sky-200 via-blue-100 to-indigo-100 flex flex-col">
@@ -344,11 +410,12 @@ export default function Component() {
 						</SheetTrigger>
 						<SheetContent side="right" className="w-[250px] bg-white">
 							<nav className="flex flex-col space-y-4">
-								{isSubscribed && (
+								{session?.user?.name && (
 									<div className="flex items-center space-x-2 mb-4">
 										<User className="h-6 w-6 text-blue-600" />
 										<span className="text-blue-600 font-semibold">
-											{translations[language].profile}
+											{session.user.name}
+											{translations[language].profile} {session.user.email}
 										</span>
 									</div>
 								)}
@@ -379,48 +446,32 @@ export default function Component() {
 										</Accordion>
 									</DialogContent>
 								</Dialog>
-								<Dialog>
+								<a
+									href="/winners"
+									className="text-lg text-blue-600 hover:text-blue-800 transition-colors">
+									{translations[language].winners}
+								</a>
+								{/* <Dialog>
 									<DialogTrigger asChild>
 										<button className="text-lg text-left text-blue-600 hover:text-blue-800 transition-colors">
 											{translations[language].winners}
 										</button>
 									</DialogTrigger>
-									<DialogContent className="bg-white">
+									<DialogContent className="bg-white overflow-y-auto">
 										<DialogHeader>
 											<DialogTitle className="text-blue-600">
 												{translations[language].winners}
 											</DialogTitle>
 										</DialogHeader>
-										<div className="mt-4">
-											<table className="w-full">
-												<thead>
-													<tr className="bg-blue-100">
-														<th className="text-left p-2">
-															{translations[language].name}
-														</th>
-														<th className="text-left p-2">
-															{translations[language].phoneNumber}
-														</th>
-														<th className="text-left p-2">
-															{translations[language].prizes}
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													{winners.map((winner: any, index: number) => (
-														<tr
-															key={index}
-															className="border-t border-blue-200">
-															<td className="p-2">{winner.name}</td>
-															<td className="p-2">{winner.phone}</td>
-															<td className="p-2">{winner.prize}</td>
-														</tr>
-													))}
-												</tbody>
-											</table>
+										<div className="mt-4 overflow-y-auto">
+											<WinnersSection
+												winners={winners}
+												translations={translations}
+												language={language}
+											/>
 										</div>
 									</DialogContent>
-								</Dialog>
+								</Dialog> */}
 								<Select onValueChange={(value) => setLanguage(value)}>
 									<SelectTrigger className="w-full bg-white text-blue-600 border-blue-300">
 										<SelectValue
@@ -435,7 +486,7 @@ export default function Component() {
 										))}
 									</SelectContent>
 								</Select>
-								{isSubscribed && (
+								{session?.user?.name && (
 									<Button
 										onClick={handleLogout}
 										variant="outline"
@@ -460,24 +511,25 @@ export default function Component() {
 					<Zap className="absolute bottom-1/4 right-1/4 w-16 h-16 text-pink-400 opacity-20 animate-bounce" />
 				</div>
 
-				<Card className="max-w-4xl w-full bg-white/60 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl py-8 px-5 z-10">
+				<Card className="max-w-4xl w-full bg-white/60 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl py-8 px-0 z-10">
 					<CardContent>
-						<div className="mb-6 p-4 bg-blue-100 rounded-lg shadow-inner flex justify-between items-center">
-							<div>
-								<p className="text-blue-800 font-semibold">
-									{translations[language].credit}: {userCredit}
-								</p>
-								<p className="text-blue-600">
-									{translations[language].phone}: {userPhone}
-								</p>
+						{session?.user && (
+							<div className="mb-6 p-4 bg-blue-100 rounded-lg shadow-inner flex justify-between items-center">
+								<div>
+									<p className="text-blue-800 font-semibold">
+										{translations[language].credit}: {userCredit}
+									</p>
+									<p className="text-blue-600">{session?.user.email as any}</p>
+								</div>
+								<Button
+									onClick={requestCredit}
+									className="bg-green-500 hover:bg-green-600 text-white">
+									<PlusCircle className="mr-2 h-4 w-4" />{" "}
+									{translations[language].requestCredit}
+								</Button>
 							</div>
-							<Button
-								onClick={requestCredit}
-								className="bg-green-500 hover:bg-green-600 text-white">
-								<PlusCircle className="mr-2 h-4 w-4" />{" "}
-								{translations[language].requestCredit}
-							</Button>
-						</div>
+						)}
+
 						{gameState === "start" && (
 							<motion.div
 								initial={{ opacity: 0, y: 20 }}
@@ -495,33 +547,11 @@ export default function Component() {
 									className="text-lg px-8 py-4 bg-lime-600 hover:bg-blue-700 text-white rounded-full transition-colors duration-300 h-12">
 									{translations[language].start} <Rocket className="ml-2" />
 								</Button>
-								{/*  Prize Section */}
-								<div className="mt-12 bg-gradient-to-r from-blue-500 to-purple-600 p-6 rounded-xl shadow-lg">
-									<h3 className="text-3xl font-bold mb-4 text-white">
-										{translations[language].prizes}
-									</h3>
-									<div className="overflow-hidden" ref={prizeListRef}>
-										<div className="flex space-x-4 pb-4 animate-scroll">
-											{[...prizes, ...prizes].map((prize, index) => (
-												<div
-													key={index}
-													className="bg-white p-4 rounded-lg flex-shrink-0 w-64 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-													<prize.icon className="h-12 w-12 text-purple-600 mb-2 mx-auto" />
-													<h4 className="text-xl font-semibold text-blue-800 mb-2">
-														{
-															translations[language][
-																prize.name.toLowerCase().replace(" ", "")
-															]
-														}
-													</h4>
-													<p className="text-purple-600 font-bold text-2xl">
-														{prize.value}
-													</p>
-												</div>
-											))}
-										</div>
-									</div>
-								</div>
+								<PrizeSection
+									prizes={prizes}
+									translations={translations}
+									language={language}
+								/>
 							</motion.div>
 						)}
 
@@ -671,7 +701,7 @@ export default function Component() {
 					</CardContent>
 				</Card>
 
-				<Dialog open={showPayment} onOpenChange={setShowPayment}>
+				{/* <Dialog open={showPayment} onOpenChange={setShowPayment}>
 					<DialogContent className="bg-white">
 						<DialogHeader>
 							<DialogTitle className="text-blue-600">
@@ -692,46 +722,14 @@ export default function Component() {
 							</Button>
 						</div>
 					</DialogContent>
-				</Dialog>
+				</Dialog> */}
 			</main>
 			{/*  Winners Section */}
-			<section className="bg-white py-12">
-				<div className="max-w-6xl mx-auto px-4">
-					<h2 className="text-3xl font-bold text-center mb-8 text-blue-600">
-						{translations[language].winners}
-					</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{winners.map((winner: any, index: number) => (
-							<div
-								key={index}
-								className="bg-gradient-to-br from-blue-100 to-purple-100 p-6 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105">
-								<div className="flex items-center mb-4">
-									<Avatar className="h-16 w-16 border-4 border-white shadow-lg">
-										<AvatarImage
-											src={`https://i.pravatar.cc/150?img=${index + 1}`}
-										/>
-										<AvatarFallback>{winner.name.charAt(0)}</AvatarFallback>
-									</Avatar>
-									<div className="ml-4">
-										<h3 className="text-xl font-semibold text-blue-800">
-											{winner.name}
-										</h3>
-										<p className="text-purple-600">{winner.phone}</p>
-									</div>
-								</div>
-								<div className="bg-white bg-opacity-50 p-4 rounded-lg">
-									<p className="text-lg font-medium text-blue-700">
-										{translations[language].prize}:{" "}
-										<span className="text-purple-600 font-bold">
-											{winner.prize}
-										</span>
-									</p>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
-			</section>
+			<WinnersSection
+				winners={winners}
+				translations={translations}
+				language={language}
+			/>
 		</div>
 	);
 }

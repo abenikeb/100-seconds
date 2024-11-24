@@ -53,49 +53,16 @@ const handler = NextAuth({
 	],
 
 	callbacks: {
-		async session({ session, token }: any) {
+		async session({ session, token }): Promise<any> {
 			console.log({ session, token });
-			if (session.user && session.user.email) {
-				return session;
-				// try {
-				// 	const response = await axios.get(
-				// 		`${process.env.REMOTE_API_URL}/users?email=${session.user.email}`
-				// 	);
-				// 	if (response.data) {
-				// 		session.user.id = response.data.id;
-				// 		session.user.phone = response.data.phone;
-
-				// 		const cookieStore = cookies();
-				// 		cookieStore.set("phone", response.data.phone);
-				// 		cookieStore.set("name", response.data.user_name);
-				// 	}
-				// } catch (error) {
-				// 	console.error("Error fetching user data:", error);
-				// }
-			} else {
-				try {
-					// const { data } = await axios.post(
-					// 	`${process.env.REMOTE_API_URL}/social-login`,
-					// 	{
-					// 		phone: token.phone,
-					// 		name: "Benjamin Asefa",
-					// 		image: "image",
-					// 		type: "credential",
-					// 	}
-					// );
-					// if (data && data.original) {
-					// 	session.user.phone = data.original.phone;
-					// 	session.user.email = data.original.email;
-					// 	session.user.name = data.original.user_name;
-					// 	const cookieStore = cookies();
-					// 	cookieStore.set("phone", data.original.phone);
-					// 	cookieStore.set("name", data.original.user_name);
-					// }
-				} catch (error) {
-					console.error("Error fetching user data:", error);
-				}
-			}
-			return session;
+			return {
+				// ...session,
+				user: {
+					name: token.name,
+					phone: token.phone || null,
+					email: token.phone || null,
+				},
+			};
 		},
 
 		async signIn({ profile, account, user }: any) {

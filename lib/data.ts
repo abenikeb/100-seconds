@@ -3,7 +3,7 @@ import { Star, Zap, Gift, Globe, Book, Calculator } from "lucide-react";
 export const getPageDetails = async () => {
 	const translations = {
 		en: {
-			title: "100 Seconds",
+			title: "Quizcroll",
 			start: "Start Quiz",
 			ready:
 				"Answer 10 questions in 100 seconds. Are you ready to explore the cosmos?",
@@ -26,7 +26,7 @@ export const getPageDetails = async () => {
 			creditRequested: "Credit request sent. Please wait for approval.",
 		},
 		am: {
-			title: "የ100 ሰኮንድ ጨዋታ",
+			title: "የQuizcroll ጨዋታ",
 			start: "ጨዋታ ጀምር",
 			ready: "በ100 ሰከንዶች ውስጥ 10 ጥያቄዎችን መልስ። ኮዞስን ለመ ዝግጁ ነህ?",
 			timeLeft: "የቀረ ጊዜ",
